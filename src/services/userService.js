@@ -12,18 +12,32 @@ const findUser = async (userEmail, userPassword) => {
   return user;
 };
 
-const generateToken = (userEmail, userPassword) => {
-  const payload = {
-    email: userEmail,
-    password: userPassword,
-  };
+const generateToken = (userInfo) => {
+  const payload = { data: { userInfo } };
   
   const token = jwt.sign(payload, process.env.JWT_SECRET);
   
   return token;
 };
 
+const getEmails = async () => {
+  const emails = await User.findAll({
+    attributes: ['email'],
+    raw: true,
+  });
+
+  return emails.map((email) => email.email);
+};
+
+const create = async (user) => {
+  const result = await User.create(user);
+  
+  return result;
+};
+
 module.exports = {
   findUser,
   generateToken,
+  getEmails,
+  create,
 };

@@ -11,4 +11,9 @@ app.post('/login',
   userMiddleware.validateUserFields,
   userController.getToken);
 
+app.post('/user',
+  userMiddleware.validateBodyInfos,
+  userMiddleware.validateUserRegister,
+  userController.create);
+
 module.exports = app;
