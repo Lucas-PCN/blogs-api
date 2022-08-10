@@ -44,10 +44,31 @@ const getAllUsers = async () => {
   return users;
 };
 
+const getByUserId = async (id) => {
+  const user = await User.findOne({
+    where: { id },
+    attributes: { exclude: ['password'] },
+    raw: true,
+  });
+
+  return user;
+};
+
+const getIds = async () => {
+  const ids = await User.findAll({
+    attributes: ['id'],
+    raw: true,
+  });
+
+  return ids.map((id) => id.id);
+};
+
 module.exports = {
   findUser,
   generateToken,
   getEmails,
   create,
   getAllUsers,
+  getByUserId,
+  getIds,
 };

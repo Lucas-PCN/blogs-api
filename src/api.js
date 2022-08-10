@@ -20,4 +20,9 @@ app.get('/user',
   userMiddleware.validateToken,
   userController.getAllUsers);
 
+app.get('/user/:id',
+  userMiddleware.validateToken,
+  userMiddleware.validateId,
+  userController.getByUserId);
+
 module.exports = app;
