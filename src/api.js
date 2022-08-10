@@ -16,4 +16,8 @@ app.post('/user',
   userMiddleware.validateUserRegister,
   userController.create);
 
+app.get('/user',
+  userMiddleware.validateToken,
+  userController.getAllUsers);
+
 module.exports = app;
