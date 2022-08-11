@@ -1,6 +1,8 @@
 const express = require('express');
 const userController = require('./controllers/userController');
 const userMiddleware = require('./middlewares/userMiddleware');
+const categoryController = require('./controllers/categoryController');
+const categoryMiddleware = require('./middlewares/categoryMiddleware');
 
 const app = express();
 
@@ -24,5 +26,10 @@ app.get('/user/:id',
   userMiddleware.validateToken,
   userMiddleware.validateId,
   userController.getByUserId);
+
+app.post('/categories',
+  userMiddleware.validateToken,
+  categoryMiddleware.validateName,
+  categoryController.createCategory);
 
 module.exports = app;
