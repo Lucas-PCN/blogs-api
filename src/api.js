@@ -32,4 +32,8 @@ app.post('/categories',
   categoryMiddleware.validateName,
   categoryController.createCategory);
 
+app.get('/categories',
+  userMiddleware.validateToken,
+  categoryController.getAllCategories);
+
 module.exports = app;
