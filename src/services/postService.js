@@ -1,7 +1,7 @@
 const { BlogPost, User, PostCategory } = require('../database/models');
 
 const createPost = async (body, user) => {
-  const findUser = await User.findOne({ where: { email: user.email } });
+  const findUser = await User.findOne({ where: { email: user.data.userInfo } });
   const { id } = findUser.dataValues;
 
   const create = await BlogPost.create({ ...body, userId: id });
