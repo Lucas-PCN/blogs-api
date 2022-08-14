@@ -44,4 +44,8 @@ app.post('/post',
   postMiddleware.validateCategory,
   postController.createPost);
 
+app.get('/post',
+  userMiddleware.validateToken,
+  postController.getAll);
+
 module.exports = app;
