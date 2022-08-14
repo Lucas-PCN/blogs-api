@@ -48,4 +48,9 @@ app.get('/post',
   userMiddleware.validateToken,
   postController.getAll);
 
+app.get('/post/:id',
+  userMiddleware.validateToken,
+  postMiddleware.validateId,
+  postController.getPostById);
+
 module.exports = app;
