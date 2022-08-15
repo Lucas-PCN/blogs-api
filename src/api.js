@@ -65,4 +65,8 @@ app.delete('/post/:id',
   postMiddleware.validateUserAuthDestroy,
   postController.destroy);
 
+app.delete('/user/me',
+  userMiddleware.validateToken,
+  userController.destroy);
+
 module.exports = app;

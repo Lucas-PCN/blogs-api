@@ -37,9 +37,16 @@ const getByUserId = async (req, res) => {
   res.status(200).json(user);
 };
 
+const destroy = async (req, res) => {
+  await UserService.destroyMe(req.user.data.userInfo);
+
+  res.status(204).json();
+};
+
 module.exports = {
   getToken,
   create,
   getAllUsers,
   getByUserId,
+  destroy,
 };

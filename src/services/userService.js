@@ -63,6 +63,17 @@ const getIds = async () => {
   return ids.map((id) => id.id);
 };
 
+const destroyMe = async (email) => {
+  const user = await User.findOne({
+    where: { email },
+  });
+  const userId = user.dataValues.id;
+
+  const removed = await User.destroy({ where: { id: userId } });
+
+  return removed;
+};
+
 module.exports = {
   findUser,
   generateToken,
@@ -71,4 +82,5 @@ module.exports = {
   getAllUsers,
   getByUserId,
   getIds,
+  destroyMe,
 };
