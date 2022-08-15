@@ -59,4 +59,10 @@ app.put('/post/:id',
   postMiddleware.validateUserAuth,
   postController.updatePost);
 
+app.delete('/post/:id',
+  userMiddleware.validateToken,
+  postMiddleware.validateId,
+  postMiddleware.validateUserAuthDestroy,
+  postController.destroy);
+
 module.exports = app;

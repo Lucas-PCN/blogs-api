@@ -81,6 +81,12 @@ const updatePost = async (body, id) => {
   return getPost;
 };
 
+const destroy = async (id) => {
+  const removed = await BlogPost.destroy({ where: { id } });
+  
+  return removed;
+};
+
 module.exports = {
   createPost,
   getAll,
@@ -88,4 +94,5 @@ module.exports = {
   getPostById,
   findUserId,
   updatePost,
+  destroy,
 };

@@ -58,10 +58,26 @@ const validateBodyUpdate = (req, res, next) => {
   next();
 };
 
+const validateUserAuthDestroy = async (req, res, next) => {
+  const { id } = req.params;
+  const email = req.user.data.userInfo;
+
+  const getPostById = await PostService.getPostById(id);
+  const idUser = getPostById.dataValues.userId;
+  const findUserId = await PostService.findUserId(email);
+
+  if (findUserId !== idUser) {
+    return res.status(401).json({ message: 'Unauthorized user' });
+  }
+
+  next();
+};
+
 module.exports = {
   validateBodyInfos,
   validateCategory,
   validateId,
   validateUserAuth,
   validateBodyUpdate,
+  validateUserAuthDestroy,
 };
