@@ -36,10 +36,18 @@ const destroy = async (req, res) => {
   res.status(204).json(result);
 };
 
+const getByQuery = async (req, res) => {
+  const { q } = req.query;
+  const result = await postService.getByQuery(q);
+
+  res.status(200).json(result);
+};
+
 module.exports = {
   createPost,
   getAll,
   getPostById,
   updatePost,
   destroy,
+  getByQuery,
 };

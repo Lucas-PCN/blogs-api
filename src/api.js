@@ -44,6 +44,10 @@ app.post('/post',
   postMiddleware.validateCategory,
   postController.createPost);
 
+app.get('/post/search',
+  userMiddleware.validateToken,
+  postController.getByQuery);
+
 app.get('/post',
   userMiddleware.validateToken,
   postController.getAll);
