@@ -53,4 +53,10 @@ app.get('/post/:id',
   postMiddleware.validateId,
   postController.getPostById);
 
+app.put('/post/:id',
+  userMiddleware.validateToken,
+  postMiddleware.validateBodyUpdate,
+  postMiddleware.validateUserAuth,
+  postController.updatePost);
+
 module.exports = app;

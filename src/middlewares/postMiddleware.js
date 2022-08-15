@@ -35,8 +35,33 @@ const validateId = async (req, res, next) => {
   next();
 };
 
+const validateUserAuth = async (req, res, next) => {
+  const { id } = req.params;
+  const email = req.user.data.userInfo;
+
+  const findUserId = await PostService.findUserId(email);
+
+  if (findUserId !== Number(id)) {
+    return res.status(401).json({ message: 'Unauthorized user' });
+  }
+
+  next();
+};
+
+const validateBodyUpdate = (req, res, next) => {
+  const { title, content } = req.body;
+
+  if (!title || !content) {
+    return res.status(400).json({ message: 'Some required fields are missing' });
+  }
+
+  next();
+};
+
 module.exports = {
   validateBodyInfos,
   validateCategory,
   validateId,
+  validateUserAuth,
+  validateBodyUpdate,
 };

@@ -56,9 +56,36 @@ const getPostById = async (id) => {
   return post;
 };
 
+const findUserId = async (email) => {
+  const user = await User.findOne({
+    where: { email },
+  });
+
+  return user.id;
+};
+
+const updatePost = async (body, id) => {
+  await BlogPost.update({ title: body.title, content: body.content }, { where: { id } });
+
+  const getPost = await BlogPost.findByPk(id, {
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: ['password'] },
+    }, {
+      model: Category,
+      as: 'categories',
+    }],
+  });
+
+  return getPost;
+};
+
 module.exports = {
   createPost,
   getAll,
   getIds,
   getPostById,
+  findUserId,
+  updatePost,
 };
